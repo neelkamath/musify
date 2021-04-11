@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { Layout, Row, Space, Spin, Typography } from 'antd';
+import { Divider, Layout, Row, Space, Spin, Typography } from 'antd';
 import { HeartOutlined, SoundOutlined } from '@ant-design/icons';
 import { Provider } from 'react-redux';
 import PlaylistEditor from './PlaylistEditor';
@@ -34,24 +34,39 @@ function AppLayout(): ReactElement {
   return (
     <Layout style={{ minHeight: '100%' }}>
       <Layout.Header>
-        <Typography.Text style={{ color: 'white' }}>
-          <Space>
-            <SoundOutlined /> Musify - Edit and listen to your music playlists
-          </Space>
-        </Typography.Text>
+        <Header />
       </Layout.Header>
-      <Layout.Content style={{ padding: 16 }}>
-        <Space direction='vertical'>
-          <AudioPlayer />
-          <PlaylistEditor />
-          <TrackAdder />
-          <TrackDeleter />
-        </Space>
+      <Layout.Content style={{ padding: 16, margin: '0 auto' }}>
+        <Content />
       </Layout.Content>
       <Layout.Footer>
         Made with <HeartOutlined /> by Neel Kamath (PES2201800467), Vamsi Krishna (PES2201800147), and Arjun Shekar
         (PES2201800072).
       </Layout.Footer>
     </Layout>
+  );
+}
+
+function Header(): ReactElement {
+  return (
+    <Typography.Text style={{ color: 'white' }}>
+      <Space>
+        <SoundOutlined /> Musify - Edit and listen to your music playlists
+      </Space>
+    </Typography.Text>
+  );
+}
+
+function Content(): ReactElement {
+  return (
+    <Space direction='vertical'>
+      <AudioPlayer />
+      <Divider />
+      <PlaylistEditor />
+      <Divider />
+      <TrackAdder />
+      <Divider />
+      <TrackDeleter />
+    </Space>
   );
 }
