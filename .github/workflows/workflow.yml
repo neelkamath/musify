@@ -12,7 +12,7 @@ jobs:
           node-version: 14
       - run: npm i
       - run: npm run lint
-  host:
+  github-pages:
     if: github.ref == 'refs/heads/master'
     needs: lint
     runs-on: ubuntu-latest
