@@ -45,7 +45,7 @@ function TrackRemoverForm(): ReactElement {
         <Cascader options={options} />
       </Form.Item>
       <Form.Item>
-        <Button loading={isLoading} type='primary' htmlType='submit'>
+        <Button danger loading={isLoading} type='primary' htmlType='submit'>
           Delete
         </Button>
       </Form.Item>
