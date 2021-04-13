@@ -8,6 +8,8 @@ import AudioPlayer from './AudioPlayer';
 import { getStore } from '../store/store';
 import TrackDeleter from './TrackDeleter';
 
+var Logo = require('/assets/LogoMakr-7JYH2y(1).png');
+
 export default function App(): ReactElement {
   const [app, setApp] = useState(<LoadingPage />);
   useEffect(() => {
@@ -34,7 +36,7 @@ function AppLayout(): ReactElement {
   return (
     <Layout style={{ minHeight: '100%' }}>
       <Layout.Header>
-        <Header />
+      <img src ={ Logo } style={ {width: 150, height: 50 }}></img>
       </Layout.Header>
       <Layout.Content style={{ padding: 16, margin: '0 auto' }}>
         <Content />
@@ -46,7 +48,7 @@ function AppLayout(): ReactElement {
     </Layout>
   );
 }
-
+/*
 function Header(): ReactElement {
   return (
     <Typography.Text style={{ color: 'white' }}>
@@ -56,7 +58,7 @@ function Header(): ReactElement {
     </Typography.Text>
   );
 }
-
+*/
 function Content(): ReactElement {
   return (
     <Space direction='vertical'>
