@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { Divider, Layout, Row, Space, Spin, Typography } from 'antd';
+import { Button, Col, Divider, Layout, Row, Space, Spin, Typography } from 'antd';
 import { HeartOutlined, SoundOutlined } from '@ant-design/icons';
 import { Provider } from 'react-redux';
 import PlaylistEditor from './PlaylistEditor';
@@ -7,17 +7,21 @@ import TrackAdder from './TrackAdder';
 import AudioPlayer from './AudioPlayer';
 import { getStore } from '../store/store';
 import TrackDeleter from './TrackDeleter';
+import { readLoggedInUsername, setLoggedInUsername } from '../storage';
+import AccountPage from './AccountPage';
 
 export default function App(): ReactElement {
   const [app, setApp] = useState(<LoadingPage />);
   useEffect(() => {
-    getStore().then((store) => {
-      setApp(
-        <Provider store={store}>
-          <AppLayout />
-        </Provider>,
-      );
-    });
+    if (readLoggedInUsername() === undefined) setApp(<AccountPage />);
+    else
+      getStore().then((store) => {
+        setApp(
+          <Provider store={store}>
+            <AppLayout />
+          </Provider>,
+        );
+      });
   }, []);
   return app;
 }
@@ -48,11 +52,23 @@ function AppLayout(): ReactElement {
 }
 
 function Header(): ReactElement {
+  const onClick = () => {
+    setLoggedInUsername(undefined);
+    location.reload();
+  };
   return (
     <Typography.Text style={{ color: 'white' }}>
-      <Space>
-        <SoundOutlined /> Musify - Edit and listen to your music playlists
-      </Space>
+      <Row gutter={16} justify='space-between'>
+        <Col>
+          <SoundOutlined /> Musify - Edit and listen to your music playlists
+        </Col>
+        <Col>Welcome {readLoggedInUsername()}</Col>
+        <Col>
+          <Button type='primary' onClick={onClick}>
+            Log out
+          </Button>
+        </Col>
+      </Row>
     </Typography.Text>
   );
 }

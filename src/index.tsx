@@ -4,4 +4,4 @@ import App from './components/App';
 import { writeState } from './storage';
 
 ReactDOM.render(<App />, document.querySelector('#root'));
-setInterval(writeState, 3000);
+setInterval(writeState, 3_000);
